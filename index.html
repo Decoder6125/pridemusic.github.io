@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="index.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="tomato">
+	<title></title>
+</head>
+<body>
+	
+	<section>
+		<div class="navbar">
+		<div id="bars" class="material-icons">menu</div>
+		<div class="logo">PRIDEMUSIC</div>
+		<div id="share" class="material-icons">share</div>
+
+		</div>
+
+    <div class="circle"><img src="banner/taro.jpg"></div><br><br><br><br><br>
+        <center>
+        <div id="title" class="title"> Taaro Ke Seher  </div>
+        <div id="singer" class="singer"> Jubin Nautiyal/ Neha Kakkar  </div>
+        <div class="time">
+        <span>00:00</span>
+        <span>03:45</span>	
+        </div>
+        <div class="duration">
+        <input type="range" min="0" max="100" value="0" id="duration-slider"></div>
+        </center>
+   <audio src= "music/taro.mp3"></audio>
+
+     <div class="bottom">
+     <div id="prev" class="prv"><i class="material-icons">
+fast_rewind
+</i></div>
+     <div class="play"><i class="fas fa-play" id="play"></i></div>	
+     <div id="next" class="nxt"><i class="material-icons">
+fast_forward
+</i></div>	
+     </div>
+
+	</section>
+
+
+
+<script>
+	const img = document.querySelector("img");
+	const music = document.querySelector("audio");
+	 const play = document.getElementById("play");
+	 const title = document.getElementById("title");
+	 const singer = document.getElementById("singer");
+	 const prev = document.getElementById("prev");
+	 const next = document.getElementById("next");
+     let imPlay = false;
+
+
+    
+const songs = [
+{
+ name : "taro",
+ title: "Taaro Ke Seher",
+ image: "taro",
+ singer: "Jubin Nautiyal/ Neha Kakkar",    
+},
+{
+ name : "hawayein",
+ title: "Hawayein",
+ image: "hawayein",
+ singer: "Arijit Singh",    
+},
+
+{
+ name : "malang",
+ title: "Malang",
+ image: "malang",
+ singer: "Ved Sharma",    
+},
+
+];
+
+
+
+
+const playMusic = () => {
+	  imPlay = true;
+      music.play();
+      play.classList.replace("fa-play", "fa-pause");
+      img.classList.add("anime");
+
+};
+
+const pauseMusic = () => {
+	  imPlay = false;
+      music.pause();
+      play.classList.replace("fa-pause", "fa-play");
+      img.classList.remove("anime");
+
+};
+
+ play.addEventListener('click', () => {
+ 	if (imPlay) {
+        pauseMusic();
+ 	} else {
+        playMusic();
+ 	}
+ });
+
+
+
+
+
+const loadSongs = (songs) => {
+   title.textContent = songs.title;
+   singer.textContent = songs.singer;
+   music.src = "music/"+ songs.name+".mp3"; 
+   img.src = "banner/"+ songs.image+".jpg";    
+};
+
+
+songIndex = 0;
+
+ const nextSong = () => {
+ 	songIndex = (songIndex + 1) % songs.length;
+    loadSongs(songs[songIndex]);
+    playMusic();
+
+ };
+
+ const prevSong = () => {
+ 	songIndex = (songIndex - 1 + songs.length) % songs.length;
+    loadSongs(songs[songIndex]);
+    playMusic();
+
+ }
+
+ 
+
+
+ next.addEventListener("click", nextSong);
+ prev.addEventListener("click",prevSong);
+</script>
+
+
+</body>
+</html>
